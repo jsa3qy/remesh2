@@ -1,0 +1,29 @@
+{% extends 'boilerplate/base.html' %}
+
+{% block content %}
+<div>
+    <h1 style="text-align:center;">Welcome User! Below you will find {{  latest_conversation_list|length  }} conversations</h1>
+    <div class="Search">
+      <form action="?search=true" method="get"> {% csrf_token %}
+        <label for="search_input">Search for the conversation youre looking for here! </label>
+        <input id="search_input" type="text" name="title" value="" placeholder="Search on empty box to show all">
+        <input id="page_type" type="hidden" name="page_type" value="Conversation">
+        <input type="hidden" name="search" value="true">
+        <input id="search_button" type="submit" value="Submit" />
+      </form>
+    </div>
+    <h3 class="List-header">Active Conversations (Start Date | Title):</h3>
+    <ul class="python-test-selenium">
+      {% for convo in latest_conversation_list %}
+      <li class="conversation-list-items">
+        {{  convo.date  }} | <a class="js-message-link" href="/conversation/{{ convo.id }}/">{{ convo.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+</div>
+<form class="Add-form" action="/conversation_submit/" method="post"> {% csrf_token %}
+  <label for="new_convo">Want to start a new conversation? </label>
+  <input id="new_convo" type="text" name="title" placeholder="Enter new title...">
+  <input id="submit_button" type="submit" value="Submit" />
+</form>
+{% endblock %}

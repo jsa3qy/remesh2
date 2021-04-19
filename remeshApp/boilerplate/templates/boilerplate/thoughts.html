@@ -1,0 +1,32 @@
+{% extends 'boilerplate/base.html' %}
+
+{% block content %}
+<div>
+    <a href="/conversation/{{  convo_id  }}">Go Back</a>
+
+    <h1 style="text-align:center;">Welcome User! Below you will find {{  thoughts_list|length  }} thought(s) for Message "{{  message_title  }}" of Conversation "{{  grandparent_title  }}"</h1>
+    <div class="Search">
+      <form action="?search=true" method="get"> {% csrf_token %}
+        <label for="search_input">Search for the Message youre looking for here! </label>
+        <input id="search_input" type="text" name="title" value="" placeholder="Search on empty box to show all">
+        <input id="page_type" type="hidden" name="page_type" value="Thought">
+        <input id="message_id" type="hidden" type="text" name="id" value="{{  message_id  }}">
+        <input type="hidden" name="search" value="true">
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    <h3 class="List-header python-test-selenium">Past Thoughts:</h3>
+    <ul>
+        {% for thought in thoughts_list %}
+          <li>{{  thought.date  }} <span style="color:red;">|</span> {{ thought.text }}</li>
+        {% endfor %}
+    </ul>
+    <form class="Add-form" action="/thought_submit/" method="post"> {% csrf_token %}
+      <label for="new_message">Want to submit a new thought? </label>
+      <input id="new_message" type="text" name="text" placeholder="New thought...">
+      <input id="message_id" type="hidden" type="text" name="id" value="{{  message_id  }}">
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <input id="submit_button" type="submit" value="Submit" />
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'boilerplate/base.html' %}
+
+{% block content %}
+<div>
+    <a href="../../">Go Back</a>
+
+    <h1 style="text-align:center;">Welcome User! Below you will find {{  message_list|length  }} message(s) for conversation "{{  convo_title  }}"</h1>
+    {% if message_list > 0 %}
+      <h3>
+        Click message links below to view associated thoughts
+      </h3>
+    {% endif %}
+    <div class="Search">
+      <form action="?search=true" method="get"> {% csrf_token %}
+        <label for="search_input">Search for the Message youre looking for here! </label>
+        <input id="search_input" type="text" name="title" value="" placeholder="Search on empty box to show all">
+        <input id="page_type" type="hidden" name="page_type" value="Message">
+        <input id="convo_id" type="hidden" type="text" name="id" value="{{  convo_id  }}">
+        <input type="hidden" name="search" value="true">
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    <h3 class="List-header python-test-selenium">Past Messages (start date | Title):</h3>
+    <ul>
+      {% for message in message_list %}
+        <li>
+          {{  message.date  }} | <a class="js-message-link" href='/messages/{{  message.id  }}'>{{ message.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <form class="Add-form" action="/message_submit/" method="post"> {% csrf_token %}
+      <label for="new_message">Want to start submit a new message to the conversation? </label>
+      <input id="new_message" type="text" name="title" placeholder="New message text...">
+      <input id="convo_id" type="hidden" type="text" name="id" value="{{  convo_id  }}">
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <input id="submit_button" type="submit" value="Submit" />
+    </form>
+</div>
+
+{% endblock %}
