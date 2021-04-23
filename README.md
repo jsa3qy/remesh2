@@ -48,3 +48,8 @@ Briefly, the test suite is contains several unit tests for models and forms, and
 - General django best practices -- this was my first django project, any cleanliness pitfalls aren't the norm, mostly just a time constraint issue. (e.g. all tests being in one folder)
 - There is some code that would need to be adjusted if we were going to deploy this to a production environment (and other steps I'd probably add, such as dockerizing)
 - some variable names could benefit from more verbosity, etc etc.
+
+#### Further Steps
+Dockerize! Work has been done to set up this app to be in a docker container using the below instructions
+https://semaphoreci.com/community/tutorials/dockerizing-a-python-django-web-application
+

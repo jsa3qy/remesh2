@@ -5,3 +5,5 @@ sqlparse==0.4.1
 selenium==2.33.0
 coverage
 webdriver-manager
+martor
+gunicorn
