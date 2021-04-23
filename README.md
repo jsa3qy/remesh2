@@ -16,8 +16,11 @@ Please make sure you have npm, python3, and pip3 installed on your OS X machine 
 * mkdir venv
 * python3 -m venv venv
 * source venv/bin/activate
-* sudo pip3 install -r requirements.txt
-* cd remeshApp
+* chmod +x start_up.sh
+* ./start_up.sh
+
+After initial run of ./start_up.sh you can just run the below to start serving (running start_up.sh will serve it at the end by running the below when it completes the set up)
+
 * python3 manage.py runserver
 
 ### Next Steps...
