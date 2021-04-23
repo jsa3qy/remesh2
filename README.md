@@ -13,9 +13,11 @@ Please make sure you have npm, python3, and pip3 installed on your OS X machine 
 
 * git clone git@github.com:jsa3qy/remesh2.git
 * cd remesh2
+* mkdir venv
+* python3 -m venv venv
+* source venv/bin/activate
 * sudo pip3 install -r requirements.txt
 * cd remeshApp
-* npm install
 * python3 manage.py runserver
 
 ### Next Steps...
